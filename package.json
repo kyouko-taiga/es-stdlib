@@ -1,7 +1,7 @@
 {
   "name": "es-stdlib",
   "version": "1.0.0",
-  "description": "The missing standard library of EcmaScript'",
+  "description": "The missing standard library of EcmaScript",
   "main": "src/index.js",
   "devDependencies": {
     "babel-cli": "^6.0.0",
