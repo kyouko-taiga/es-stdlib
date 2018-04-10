@@ -195,7 +195,7 @@ Sorts the array in place with the given comparator.
 
 ```js
 const numbers = [ 2, -7, 4, -3 ]
-est.array.sort(numbers, (a, b) => a < b)
+esl.array.sort(numbers, (a, b) => a < b)
 console.log(numbers)
 // Prints "[ -7, -3, 2, 4 ]"
 ```
