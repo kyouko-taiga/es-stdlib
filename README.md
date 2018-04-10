@@ -113,8 +113,8 @@ Returns whether the two given arrays are shallowly equal.
   By default, JavaScript's *loose equality* (e.g. `==`) is performed.
 
 ```js
-const firstRow = ['apple', 'orange']
-const secondRow = ['apple', 'orange']
+const firstRow = [ 'apple', 'orange' ]
+const secondRow = [ 'apple', 'orange' ]
 if (esl.array.equals(firstRow, secondRow)) {
   console.log('The second and first rows are equals.')
 }
@@ -135,7 +135,7 @@ Inserts an element in the array in place, at the given index.
   Note that the given index should be within the bounds of the array.
 
 ```js
-const fruits = ['apple', 'orange']
+const fruits = [ 'apple', 'orange' ]
 esl.array.insert(fruits, 'pineapple', 1)
 console.log(fruits)
 // Prints "[ 'apple', 'pineapple', 'orange' ]"
@@ -156,7 +156,7 @@ Removes an element in the array in place, at the given index.
   Note that it should be within the bounds of the array.
 
 ```js
-const fruits = ['apple', 'orange']
+const fruits = [ 'apple', 'orange' ]
 esl.array.remove(fruits, 1)
 console.log(fruits)
 // Prints "[ 'apple' ]"
@@ -173,7 +173,7 @@ filtering out elements for which the transform function returns `null`.
 
 **Parameters**
 
-* `index`
+* `transform`
   A closure that takes an element of the array as its argument and returns its transformation,
   or `null` if it should be discarded.
 
@@ -204,3 +204,175 @@ console.log(numbers)
 #### `sorting(self, comparator)`
 
 Same as `sort`, but returns a new array instead of mutating the given one.
+
+### Object
+
+#### `isEmpty(self)`
+
+Returns whether the given object is empty.
+```js
+const basket = [ 'apple': 2, 'orange': 1 ]
+if (!esl.object.isEmpty(fruits)) {
+  console.log('There are fruits in the basket.')
+}
+// Prints "There are fruits in the basket."
+```
+
+#### `length(self)`
+
+Returns number of keys in the given object.
+```js
+const basket = [ 'apple': 2, 'orange': 1 ]
+const different = esl.object.length(basket)
+console.log(`There are ${different} kind(s) of fruit in the basket.`)
+// Prints "There are 2 kind(s) of fruit in the basket."
+```
+
+#### `contains(self, predicate)`
+
+Returns whether the object contains a key/value pair satisfying the given predicate.
+
+**Parameters**
+
+* `predicate`
+  A closure that takes a key/value pair of the object as its arguments
+  and returns `true` if it should match the search
+  *or*
+  a key/value pair that should be matched from the object.
+
+```js
+const basket = [ 'apple': 2, 'orange': 1 ]
+
+const hasTwoApple = els.object.contains([ 'apple', 2 ])
+console.log(`The array contains two apples: ${hasTwoApple}`)
+// Prints "true"
+
+const hasSingle = els.object.contains((k, v) => v == 1)
+console.log(`The array contains unique fruits: ${hasSingle}`)
+// Prints "true"
+```
+
+#### `equals(self, other, [comparator])`
+
+Returns whether the two given objects are shallowly equal.
+
+**Parameters**
+
+* `other`
+  The other object.
+* `comparator`
+  An optional closure that takes an value from both objects
+  and returns whether there are equals.
+  By default, JavaScript's *loose equality* (e.g. `==`) is performed.
+
+```js
+const firstRow = { 'apple': 2, 'orange': 1 }
+const secondRow = { 'apple': 2, 'orange': 1 }
+if (esl.object.equals(firstRow, secondRow)) {
+  console.log('The second and first rows are equals.')
+}
+// Prints "The second and first rows are equals."
+```
+
+#### `merge(self, other, combinator)`
+
+Merges an object into the given one,
+using the given combinator to determine the value for any duplicate keys.
+
+**Parameters**
+
+* `other`
+  The other object.
+* `combinator`
+  A closure that takes an value from both objects
+  and returns the one that should be kept.
+
+```js
+const basket = { 'apple': 2, 'orange': 1 }
+esl.object.merge(basket, { 'pineapple': 2, 'orange': 2 }, (lhs, _) => lhs)
+console.log(basket)
+// Prints "{ 'apple': 2, 'orange': 1, 'pineapple': 2 }"
+```
+
+#### `merging(self, other, combinator)`
+
+Same as `merge`, but returns a new object instead of mutating the given one.
+
+#### `filter(self, predicate)`
+
+Filters out key/value pairs from the given object if they satisfy a predicate.
+
+**Parameters**
+
+* `predicate`
+  A closure that takes a key/value pair of the object as its arguments
+  and returns `true` if it should match the search.
+
+```js
+const basket = { 'apple': 2, 'orange': 1 }
+esl.object.filter(basket, (key, value) => key != 'orange')
+console.log(basket)
+// Prints "{ 'apple': 2 }"
+```
+
+#### `filtering(self, predicate)`
+
+Same as `filter`, but returns a new object instead of mutating the given one.
+
+#### `mutate(self, transform)`
+
+Mutates the given object's key/value pairs with a transform function.
+
+**Parameters**
+
+* `transform`
+  A closure that takes a key/value pair of the object as its arguments
+  and returns its transformation,
+  or `null` if it should be discarded.
+
+```js
+const basket = { 'apple': 2, 'orange': 1 }
+esl.object.transform(basket, (key, value) => key == 'apple' ? ['pear', 3] : null)
+console.log(basket)
+// Prints "{ 'pear': 3 }"
+```
+
+#### `mutating(self, transform)`
+
+Same as `mutate`, but returns a new object instead of mutating the given one.
+
+#### `map(self, transform)`
+
+Applies the given transform function on the object's key/value pairs to produce an array.
+
+**Parameters**
+
+* `transform`
+  A closure that takes a key/value pair of the object as its arguments
+  and returns its transformation.
+
+```js
+const basket = { 'apple': 2, 'orange': 1 }
+const fruits = esl.object.transform(basket, (key, value) => key)
+console.log(fruits)
+// Prints "[ 'apple', 'orange' ]"
+```
+
+#### `compactMap(self, transform)`
+
+Applies the given transform function on the object's key/value pairs to produce an array,
+filtering out elements for which the transform function returns `null`.
+
+**Parameters**
+
+* `transform`
+  A closure that takes a key/value pair of the object as its arguments
+  and returns its transformation,
+  or `null` if it should be discarded.
+
+```js
+const basket = { 'apple': 2, 'orange': 1 }
+const fruits = esl.object.transform(basket, (key, value) => key != 'apple' ? key : null)
+console.log(fruits)
+// Prints "[ 'orange' ]"
+```
