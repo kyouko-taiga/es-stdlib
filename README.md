@@ -1,7 +1,7 @@
 # es-stdlib
 [![Build Status](https://travis-ci.org/kyouko-taiga/es-stdlib.svg?branch=master)](https://travis-ci.org/kyouko-taiga/es-stdlib)
 
-`es-stdlib` is a small package that aim at providing a decent standard library to EcmaScript.
+`es-stdlib` is a small package that aims at providing a decent standard library to EcmaScript.
 
 ## Motivation
 
