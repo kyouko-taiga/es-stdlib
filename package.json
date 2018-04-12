@@ -1,8 +1,8 @@
 {
   "name": "es-stdlib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The missing standard library of EcmaScript",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "devDependencies": {
     "babel-cli": "^6.0.0",
     "babel-eslint": "^8.0.1",
