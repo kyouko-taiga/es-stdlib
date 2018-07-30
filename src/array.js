@@ -84,6 +84,17 @@ function compactMap(self, transform) {
   return result
 }
 
+function unique(self) {
+  if (!(self instanceof Array)) { throw new TypeError(`${self} is not an array`) }
+  const result = []
+  for (let element of self) {
+    if (result.indexOf(element) == -1) {
+      result.push(element)
+    }
+  }
+  return result
+}
+
 function sort(self, comparator) {
   if (!(self instanceof Array)) { throw new TypeError(`${self} is not an array`) }
   self.sort((a, b) => (comparator(a, b) ? -1 : +1))
@@ -111,6 +122,7 @@ export default {
   remove,
   removing,
   compactMap,
+  unique,
   sort,
   sorting,
 }
