@@ -184,6 +184,18 @@ console.log(squaresOfNegative)
 // Prints "[ 49, 9 ]"
 ```
 
+#### `unique(self)`
+
+Filter out duplicated values to produce a new array.
+Note that elements order is kept as in the original array.
+
+```js
+const numbers = [ 2, 3, 2, 1, 3 ]
+const uniqueNumbers = esl.array.unique(numbers)
+console.log(uniqueNumbers)
+// Prints "[ 2, 3, 1 ]"
+```
+
 #### `sort(self, comparator)`
 
 Sorts the array in place with the given comparator.

@@ -1,6 +1,6 @@
 {
   "name": "es-stdlib",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The missing standard library of EcmaScript",
   "main": "lib/index.js",
   "devDependencies": {

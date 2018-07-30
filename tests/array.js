@@ -106,6 +106,16 @@ describe('array', () => {
     expect(u.array.equals(result, [ 16, 9, 1 ])).to.be.true
   })
 
+  it('unique', () => {
+    expect(u.array.equals(u.array.unique([3, 1, 2]), [3, 1, 2])).to.be.true
+    expect(u.array.equals(u.array.unique([3, 1, 2, 1]), [3, 1, 2])).to.be.true
+    expect(u.array.equals(u.array.unique([3, 2, 3, '2']), [3, 2, '2'])).to.be.true
+    const a1 = [1, 2]
+    const a2 = [1, 2]
+    expect(u.array.equals(u.array.unique([3, a1, a1]), [3, a1])).to.be.true
+    expect(u.array.equals(u.array.unique([3, a1, a2]), [3, a1, a2])).to.be.true
+  })
+
   it('sort', () => {
     const a = [ 4, 2, 3, 1 ]
     u.array.sort(a, (a, b) => (a < b))
