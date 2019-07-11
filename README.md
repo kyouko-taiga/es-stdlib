@@ -344,7 +344,7 @@ Mutates the given object's key/value pairs with a transform function.
 
 ```js
 const basket = { 'apple': 2, 'orange': 1 }
-esl.object.transform(basket, (key, value) => key == 'apple' ? ['pear', 3] : null)
+esl.object.mutate(basket, (key, value) => key == 'apple' ? ['pear', 3] : null)
 console.log(basket)
 // Prints "{ 'pear': 3 }"
 ```
@@ -365,7 +365,7 @@ Applies the given transform function on the object's key/value pairs to produce 
 
 ```js
 const basket = { 'apple': 2, 'orange': 1 }
-const fruits = esl.object.transform(basket, (key, value) => key)
+const fruits = esl.object.map(basket, (key, value) => key)
 console.log(fruits)
 // Prints "[ 'apple', 'orange' ]"
 ```
@@ -384,7 +384,7 @@ filtering out elements for which the transform function returns `null`.
 
 ```js
 const basket = { 'apple': 2, 'orange': 1 }
-const fruits = esl.object.transform(basket, (key, value) => key != 'apple' ? key : null)
+const fruits = esl.object.compactMap(basket, (key, value) => key != 'apple' ? key : null)
 console.log(fruits)
 // Prints "[ 'orange' ]"
 ```
