@@ -1,23 +1,23 @@
 {
   "name": "es-stdlib",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "description": "The missing standard library of EcmaScript",
   "main": "lib/index.js",
   "devDependencies": {
-    "babel-cli": "^6.0.0",
-    "babel-eslint": "^8.2.6",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/register": "^7.4.4",
+    "babel-eslint": "^10.0.2",
     "chai": "^4.2.0",
-    "eslint": "^4.8.0",
-    "istanbul": ">=1.0.0-alpha.2",
-    "mocha": "^5.2.0",
+    "eslint": "^6.0.1",
+    "mocha": "^6.1.4",
     "watchify": "^3.11.1"
   },
   "scripts": {
     "compile": "babel src -d lib",
     "prepare": "npm run compile",
-    "test": "mocha --require babel-core/register --recursive tests"
+    "test": "mocha --require @babel/register --recursive tests"
   },
   "author": "Dimitri Racordon <dimitri@socialease.ch> (http://socialease.ch)",
   "license": "MIT",
